@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <link rel="stylesheet" href="../style/panel-style.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>
+        $( function() {
+            var availableTags = [
+                "Food", "Football", "Programming", "Travel", "Sport", "Sleep", "Body", "Head", "Hair", "Smartphone",
+                "Computer", "School", "University", "Car", "Airplane", "Dinner", "Bed", "Ball", "Cat", "Dog", "Animal",
+                "Wardrobe", "Pencil", "Match", "Flowers", "House", "Flat", "City", "Country", "Truck", "Bus", "Work",
+                "Job", "Intern", "Smile", "Music", "Movie", "Cinema", "Internet", "Website"
+            ];
+            $( "#tags" ).autocomplete({
+                source: availableTags
+            });
+        } );
+    </script>
+
+    <meta charset="UTF-8">
+    <title>Edit campaigns</title>
+</head>
+<body>
+<h2>
+    Edit campaigns<br><br><br>
+</h2>
+<form method="POST" action="#" th:action="@{/panel}" th:object="${form}">
+    <table>
+        <tr>
+            <th>
+                Name
+                <span style="color: red; ">
+                *
+                </span>
+            </th>
+            <th>
+                Keyword
+                <span style="color: red; ">
+                *
+                </span>
+            </th>
+            <th>
+                Bid amount
+                <span style="color: red; ">
+                *
+                </span>
+            </th>
+        </tr>
+        <tr>
+
+            <td>
+                <input type="text" th:field="*{campaignName}"  minlength="3" required><br>
+            </td>
+            <td>
+                <div class="ui-widget">
+                    <input id="tags" th:field="*{keyword}"  required>
+                </div>
+            </td>
+            <td>
+                <input type="number" th:field="*{bidAmount}"  min="0"  step="1" required><br>
+            </td>
+        </tr>
+        <tr>
+            <th>
+                Fund
+                <span style="color: red; ">
+                *
+                </span>
+            </th>
+            <th>
+                Status
+                <span style="color: red; ">
+                *
+                </span>
+            </th>
+            <th>
+                Town
+                <span style="color: red; ">
+                *
+                </span>
+            </th>
+
+        </tr>
+        <tr>
+            <td>
+                <input type="number" th:field="*{campaignFund}"  min="0"  step="1" required><br>
+            </td>
+            <td>
+
+                <select name="status" required>
+                    <option value=""></option>
+                    <option value="ON">ON</option>
+                    <option value="OFF">OFF</option>
+
+                </select>
+                <br>
+            </td>
+            <td>
+                <select th:field="*{town}"  required>
+                    <option value=""></option>
+                    <option value="Warszawa">Warszawa</option>
+                    <option value="Kraków">Kraków</option>
+                    <option value="Rzeszów">Rzeszów</option>
+                    <option value="Poznań">Poznań</option>
+                    <option value="Łódź">Łódź</option>
+                    <option value="Gdańsk">Gdańsk</option>
+                    <option value="Wrocław">Wrocław</option>
+                    <option value="Wrocław">Wrocław</option>
+                    <option value="Kielce">Kielce</option>
+                    <option value="Białystok">Białystok</option>
+                    <option value="Szczecin">Szczecin</option>
+                    <option value="Lublin">Lublin</option>
+                    <option value="Olsztyn">Olsztyn</option>
+                </select><br>
+            </td>
+
+        </tr>
+        <tr>
+            <th>
+                Radius<c> [km]</c>
+                <span style="color: red; ">
+                *
+                </span>
+            </th>
+            <th>
+            </th>
+            <th>
+            </th>
+        <tr>
+            <td>
+                <input type="number" th:field="*{radius}"  min="0"  step="1" required><br>
+            </td>
+            <trd></trd>
+            <trd></trd>
+        </tr>
+        </tr>
+    </table>
+
+
+    <br><br><br>
+    <div style="text-align: center;">
+        <form>
+            <input type="button" value="Back" onclick="history.back()">
+        </form>
+        <input type="reset" value="Reset">
+        <input type="submit" value="Edit">
+    </div>
+</form>
+</body>
+</html>
