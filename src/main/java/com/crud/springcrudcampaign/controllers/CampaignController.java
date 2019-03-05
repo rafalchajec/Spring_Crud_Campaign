@@ -46,15 +46,7 @@ public class CampaignController {
         else
             budget=budget-campaign.getCampaignFund();
 
-
-        if(budget<=0) {
-            budget=0;
-
-            return "/message/money";
-        }
-        else {
-            campaignRepository.save(campaign);
-        }
+        campaignRepository.save(campaign);
 
         return "panel";
     }
@@ -89,13 +81,8 @@ public class CampaignController {
             else
                 budget=budget-campaign.getCampaignFund();
 
-            if(budget<=0) {
-                budget=0;
-                return "/message/money";
-            }
-            else {
-                campaignRepository.save(campaignEdit);
-            }
+            campaignRepository.save(campaignEdit);
+
         }
         else
             return "/message/empty";
@@ -128,7 +115,7 @@ public class CampaignController {
         }
         else return "/message/empty";
 
-        return "/crud/showCampaign";
+        return "panel";
     }
 
 
