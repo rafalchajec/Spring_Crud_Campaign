@@ -15,7 +15,6 @@ public interface CampaignRepository extends CrudRepository<Campaign, Long> {
 
     Optional<Campaign> findByCampaignName(String campaignName);
 
-    void deleteByCampaignName(String campaignName);
     //List<Campaign> findByCampaignName(Campaign campaignName);
 
 

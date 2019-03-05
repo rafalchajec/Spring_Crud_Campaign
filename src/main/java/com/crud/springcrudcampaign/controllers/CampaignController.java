@@ -44,8 +44,9 @@ public class CampaignController {
     public String addNewCampaigns(@ModelAttribute Campaign campaign) {
         budget=budget-campaign.getCampaignFund();
         if(budget<=0) {
-            System.out.println("WE DONT HAVE MONEY!!");
             budget=0;
+
+            return "/message/money";
         }
         else {
             campaignRepository.save(campaign);
@@ -63,28 +64,34 @@ public class CampaignController {
 
     @PostMapping("/edit-campaigns")
     public String editNewCampaigns(@ModelAttribute Campaign campaign) {
-        budget=budget-campaign.getCampaignFund();
-        Optional<Campaign> campaign1 = campaignRepository.findByCampaignName(campaign.getCampaignName());
-        if(campaign1.isPresent()){
-            Campaign campaign2 = campaign1.get();
-            campaign2.setCampaignName(campaign.getCampaignName());
-            campaign2.setKeyword(campaign.getKeyword());
-            campaign2.setBidAmount(campaign.getBidAmount());
-            campaign2.setCampaignFund(campaign.getCampaignFund());
-            campaign2.setStatus(campaign.getStatus());
-            campaign2.setTown(campaign.getTown());
-            campaign2.setRadius(campaign.getRadius());
+
+        if(campaign.getCampaignFund()>budget)
+            return "/message/money";
+        else
+            budget=budget-campaign.getCampaignFund();
+
+        Optional<Campaign> campaignFind = campaignRepository.findByCampaignName(campaign.getCampaignName());
+        if(campaignFind.isPresent()){
+            Campaign campaignEdit = campaignFind.get();
+            campaignEdit.setCampaignName(campaign.getCampaignName());
+            campaignEdit.setKeyword(campaign.getKeyword());
+            campaignEdit.setBidAmount(campaign.getBidAmount());
+            campaignEdit.setCampaignFund(campaign.getCampaignFund());
+            campaignEdit.setStatus(campaign.getStatus());
+            campaignEdit.setTown(campaign.getTown());
+            campaignEdit.setRadius(campaign.getRadius());
 
             if(budget<=0) {
-                System.out.println("WE DONT HAVE MONEY!!!");
                 budget=0;
+
+                return "/message/money";
             }
             else {
-                campaignRepository.save(campaign2);
+                campaignRepository.save(campaignEdit);
             }
         }
         else
-            return "panel";
+            return "/message/empty";
 
 
 
@@ -112,18 +119,15 @@ public class CampaignController {
     }
     @PostMapping("/delete-campaigns")
     public String deleteNewCampaigns(@ModelAttribute Campaign campaign) {
-        Optional<Campaign> campaign1 = campaignRepository.findByCampaignName(campaign.getCampaignName());
-        if (campaign1.isPresent()) {
-            campaignRepository.delete(campaign1.get());
+        Optional<Campaign> campaignDelete = campaignRepository.findByCampaignName(campaign.getCampaignName());
+        if (campaignDelete.isPresent()) {
+            campaignRepository.delete(campaignDelete.get());
         }
-        else return "panel";
+        else return "/message/empty";
 
 
-        return "panel";
+        return "/crud/showCampaign";
     }
-
-
-
 
 
 }
