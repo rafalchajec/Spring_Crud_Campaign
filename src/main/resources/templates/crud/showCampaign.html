@@ -36,9 +36,9 @@
         </th>
 
     </tr>
-    <tr th:each="form : ${campaignsList}">
+    <tr th:each="form : *{showCampaignsLists}">
         <td th:text="${form.campaignName}" align="center"></td>
-        <td th:text="${form.keywords}" align="center"></td>
+        <td th:text="${form.keyword}" align="center"></td>
         <td th:text="${form.bidAmount}" align="center"></td>
         <td th:text="${form.campaignFund}" align="center"></td>
         <td th:text="${form.status}" align="center"></td>

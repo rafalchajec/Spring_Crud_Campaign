@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+
 <html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <link rel="stylesheet" href="../style/panel-style.css">
@@ -23,11 +24,14 @@
 
     <meta charset="UTF-8">
     <title>Add campaign</title>
+
 </head>
 <body>
 <h2>
     Add campaign<br><br><br>
 </h2>
+<h2>Our budget:</h2>
+<h2 th:text="${budget}"></h2>
 
 <form action="#" th:action="@{/panel/add-campaigns}" th:object="${panel}" method="post">
     <table>
@@ -89,6 +93,7 @@
         <tr>
             <td>
                 <input type="number" th:field="*{campaignFund}"  min="0"  step="1" required><br>
+
             </td>
             <td>
 

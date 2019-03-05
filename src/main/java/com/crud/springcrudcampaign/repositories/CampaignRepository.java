@@ -8,10 +8,16 @@ import org.springframework.stereotype.Repository;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
+import java.util.Optional;
 
 public interface CampaignRepository extends CrudRepository<Campaign, Long> {
+    List<Campaign> findAll();
 
-    List<Campaign> findByCampaignName(String campaignName);
+    Optional<Campaign> findByCampaignName(String campaignName);
+
+    void deleteByCampaignName(String campaignName);
+    //List<Campaign> findByCampaignName(Campaign campaignName);
+
 
 
 }
