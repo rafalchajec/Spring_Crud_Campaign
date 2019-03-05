@@ -67,9 +67,9 @@ public class CampaignController {
         return modelAndView;
     }
 
+
     @PostMapping("/edit-campaigns")
     public String editNewCampaigns(@ModelAttribute Campaign campaign) {
-
 
 
         Optional<Campaign> campaignFind = campaignRepository.findByCampaignName(campaign.getCampaignName());
@@ -91,7 +91,6 @@ public class CampaignController {
 
             if(budget<=0) {
                 budget=0;
-
                 return "/message/money";
             }
             else {
@@ -128,7 +127,6 @@ public class CampaignController {
             campaignRepository.delete(campaignDelete.get());
         }
         else return "/message/empty";
-
 
         return "/crud/showCampaign";
     }
