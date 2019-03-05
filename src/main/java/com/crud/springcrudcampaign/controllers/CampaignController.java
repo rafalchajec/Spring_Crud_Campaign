@@ -42,7 +42,13 @@ public class CampaignController {
     }
     @PostMapping("/add-campaigns")
     public String addNewCampaigns(@ModelAttribute Campaign campaign) {
-        budget=budget-campaign.getCampaignFund();
+
+        if(campaign.getCampaignFund()>budget)
+            return "/message/money";
+        else
+            budget=budget-campaign.getCampaignFund();
+
+
         if(budget<=0) {
             budget=0;
 
