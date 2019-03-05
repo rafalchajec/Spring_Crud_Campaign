@@ -24,13 +24,10 @@ public class CampaignController {
     CampaignRepository campaignRepository;
 
 
-
-
     @GetMapping("")
     public ModelAndView panel() {
         return new ModelAndView("panel");
     }
-
 
 
     @GetMapping("/add-campaigns")
@@ -40,6 +37,7 @@ public class CampaignController {
         modelAndView.addObject("budget",budget);
         return modelAndView;
     }
+
     @PostMapping("/add-campaigns")
     public String addNewCampaigns(@ModelAttribute Campaign campaign) {
 
@@ -65,16 +63,14 @@ public class CampaignController {
     public ModelAndView editCampaigns(){
         ModelAndView modelAndView = new ModelAndView("crud/editCampaign");
         modelAndView.addObject("panel", new Campaign());
+        modelAndView.addObject("budget",budget);
         return modelAndView;
     }
 
     @PostMapping("/edit-campaigns")
     public String editNewCampaigns(@ModelAttribute Campaign campaign) {
 
-        if(campaign.getCampaignFund()>budget)
-            return "/message/money";
-        else
-            budget=budget-campaign.getCampaignFund();
+
 
         Optional<Campaign> campaignFind = campaignRepository.findByCampaignName(campaign.getCampaignName());
         if(campaignFind.isPresent()){
@@ -86,6 +82,12 @@ public class CampaignController {
             campaignEdit.setStatus(campaign.getStatus());
             campaignEdit.setTown(campaign.getTown());
             campaignEdit.setRadius(campaign.getRadius());
+
+
+            if(campaign.getCampaignFund()>budget)
+                return "/message/money";
+            else
+                budget=budget-campaign.getCampaignFund();
 
             if(budget<=0) {
                 budget=0;
@@ -99,12 +101,8 @@ public class CampaignController {
         else
             return "/message/empty";
 
-
-
-        System.out.println("Our budget: "+budget);
         return "panel";
     }
-
 
     @GetMapping("/show-campaigns")
     public ModelAndView showCampaigns() {
@@ -115,7 +113,6 @@ public class CampaignController {
         return modelAndView;
     }
 
-
     @GetMapping("/delete-campaigns")
     public ModelAndView deleteGoods() {
         ModelAndView modelAndView = new ModelAndView("crud/deleteCampaign");
@@ -123,6 +120,7 @@ public class CampaignController {
         return modelAndView;
 
     }
+
     @PostMapping("/delete-campaigns")
     public String deleteNewCampaigns(@ModelAttribute Campaign campaign) {
         Optional<Campaign> campaignDelete = campaignRepository.findByCampaignName(campaign.getCampaignName());
