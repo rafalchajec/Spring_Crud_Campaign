@@ -42,14 +42,23 @@ public class CampaignController {
     @PostMapping("/add-campaigns")
     public String addNewCampaigns(@ModelAttribute Campaign campaign) {
 
-        if(campaign.getCampaignFund()>budget)
-            return "/message/money";
-        else
-            budget=budget-campaign.getCampaignFund();
+        Optional<Campaign> campaignExist = campaignRepository.findByCampaignName(campaign.getCampaignName());
+        if(campaignExist.isPresent()){
+
+            return "/message/nameExist";
+
+        }else {
+
+            if(campaign.getCampaignFund()>budget)
+                return "/message/money";
+            else
+                budget=budget-campaign.getCampaignFund();
+        }
 
         campaignRepository.save(campaign);
 
         return "panel";
+
     }
 
     //------------------------------------------------------------------------------------------------------------------

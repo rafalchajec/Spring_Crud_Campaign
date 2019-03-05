@@ -1,5 +1,7 @@
 package com.crud.springcrudcampaign.entities;
 
+import org.hibernate.validator.constraints.UniqueElements;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotNull;
