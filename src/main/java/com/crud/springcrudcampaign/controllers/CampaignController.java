@@ -1,6 +1,5 @@
 package com.crud.springcrudcampaign.controllers;
 
-
 import com.crud.springcrudcampaign.entities.Campaign;
 import com.crud.springcrudcampaign.repositories.CampaignRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +7,6 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
-
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
 import java.util.List;
@@ -29,6 +27,9 @@ public class CampaignController {
         return new ModelAndView("panel");
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    // ADD NEW CAMPAIGNS
 
     @GetMapping("/add-campaigns")
     public ModelAndView addCampaigns() {
@@ -51,6 +52,9 @@ public class CampaignController {
         return "panel";
     }
 
+    //------------------------------------------------------------------------------------------------------------------
+
+    // EDIT EXISTING CAMPAIGNS
     @GetMapping("/edit-campaigns")
     public ModelAndView editCampaigns(){
         ModelAndView modelAndView = new ModelAndView("crud/editCampaign");
@@ -89,6 +93,9 @@ public class CampaignController {
 
         return "panel";
     }
+    //------------------------------------------------------------------------------------------------------------------
+
+    //SHOW ALL CAMPAIGNS
 
     @GetMapping("/show-campaigns")
     public ModelAndView showCampaigns() {
@@ -98,6 +105,9 @@ public class CampaignController {
 
         return modelAndView;
     }
+    //------------------------------------------------------------------------------------------------------------------
+
+    //DELETE FROM DATABASE
 
     @GetMapping("/delete-campaigns")
     public ModelAndView deleteGoods() {
@@ -117,6 +127,7 @@ public class CampaignController {
 
         return "panel";
     }
+    //------------------------------------------------------------------------------------------------------------------
 
 
 }
